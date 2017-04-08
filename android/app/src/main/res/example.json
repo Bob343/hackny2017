@@ -1,0 +1,39 @@
+{
+  "locations" : [
+    {
+      "location_id" : "1",
+      "image" : "example-1.jpg",
+      "name" : "Empire State Building",
+      "address" : "350 5th Avenue, New York, NY 10118",
+      "information" : "The Empire State Building is a 102-story skyscraper located on Fifth Avenue between West 33rd and 34th Streets in Midtown, Manhattan, New York City. It has a roof height of 1,250 feet (381 m), and with its antenna included, it stands a total of 1,454 feet (443.2 m) tall.[7] Its name is derived from the nickname for New York, the Empire State."
+    },
+    {
+      "location_id" : "2",
+      "image" : "example-2.jpg",
+      "name" : "Trump Tower",
+      "address" : "725 5th Avenue, New York, NY 10022",
+      "information" : ""
+    },
+    {
+      "location_id" : "3",
+      "image" : "example-3.jpg",
+      "name" : "",
+      "address" : "",
+      "information" : ""
+    },
+    {
+      "location_id" : "4",
+      "image" : "example-4.jpg",
+      "name" : "",
+      "address" : "",
+      "information" : ""
+    },
+    {
+      "location_id" : "5",
+      "image" : "example-5.jpg",
+      "name" : "",
+      "address" : "",
+      "information" : ""
+    }
+  ]
+}
