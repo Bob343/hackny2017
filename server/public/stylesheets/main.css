@@ -1,0 +1,12 @@
+html {
+  font-family: 'Lobster';
+}
+
+body {
+  /*background-color: #263238; /* Corresponds to blue-grey darken-4 materialize class */
+  background-color: #455a64;
+}
+
+.black-transparent {
+  background: rgba(0, 0, 0, 0.75);
+}

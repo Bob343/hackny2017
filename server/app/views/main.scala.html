@@ -4,10 +4,46 @@
 <html lang="en">
     <head>
         <title>@title</title>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
-        <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
     </head>
     <body>
+        <!-- Navigation Bar -->
+        <div class="navbar-fixed">
+          <nav class="black-transparent" role="navigation">
+            <div class="nav-wrapper container">
+              <ul class="right hide-on-med-and-down">
+                <li><a href="/">Home</a></li>
+                <li><a href="/upload">Upload Photo</a></li>
+              </ul>
+
+              <ul id="nav-mobile" class="side-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/upload">Upload Photo</a></li>
+              </ul>
+              <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons white-text">menu</i></a>
+            </div>
+          </nav>
+        </div>
+
         @content
+
+        <!-- Footer for all pages -->
+        <footer class="page-footer blue-grey darken-2">
+          <div class="container">
+            <!-- Empty container: fill content here -->
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            Made with <a class="white-text " href="http://materializecss.com">Materialize</a>
+            </div>
+          </div>
+        </footer>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+        <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
     </body>
 </html>

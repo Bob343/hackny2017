@@ -1,8 +1,30 @@
 @main("Form") {
-  @helper.form(action = routes.ApplicationController.upload, 'enctype -> "multipart/form-data") {
-    <label>Latitude:</label><input type="text" name="lat" /></br>
-    <label>Longitude:</label><input type="text" name="lon" /></br>
-    <lable>Picture:</lable><input type="file" name="image" /></br>
-    <input type="submit" value="Submit" />
-  }
+  <div class="container">
+    @helper.form(action = routes.ApplicationController.upload, 'enctype -> "multipart/form-data") {
+      <div class="center white-text">
+        <div class="input-field">
+          <label class="white-text">Latitude:</label>
+          <input type="text" name="lat" />
+        </div>
+        <div class="input-field">
+          <label class="white-text">Longitude:</label>
+          <input type="text" name="lon" />
+        </div>
+        <div class="file-field input-field">
+          <lable>What are you looking at?:</lable>
+          <div class="btn">
+            <span>File</span>
+            <input type="file" name="image">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+        <div class="input-field">
+          <input class="btn" type="submit" value="Submit" />
+        </div>
+      </div>
+      </br></br>
+    }
+  </div>
 }

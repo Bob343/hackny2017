@@ -1,17 +1,13 @@
 package controllers
 
-import services.FoursquareService
-
 import javax.inject._
 import play.api._
 import play.api.mvc._
 
 @Singleton
-class HomeController @Inject()(fs: FoursquareService) extends Controller {
+class HomeController @Inject() extends Controller {
 
   def index = Action {
-    val venues = fs.findVenues(40.728736,-73.995337)
-    val photos = fs.venuePhotosAsArrayList(fs.venuePhotos(venues))
-    Ok(views.html.index(photos.toString))
+    Ok(views.html.index())
   }
 }

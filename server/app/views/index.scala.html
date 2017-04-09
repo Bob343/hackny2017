@@ -1,7 +1,70 @@
-@(message: String)
+@main("InSight | Home") {
+  <!-- Begin Parallax Content -->
+  <div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+      <br /><br/>
+      <div class="container black-transparent">
+        <br/>
+        <h1 class="header center light white-text">Welcome to InSight</h1>
+        <div class="row center">
+          <h3 class="header col s12 light white-text">For Discerning Travelers Who Don't Know Where They Are</h3>
+        </div>
+        <br/>
+      </div>
+    </div>
+    <div class="parallax"><iframe src="//giphy.com/embed/ter6GOVuGqBS8" width="100%" height="100%" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/landscape-singapore-ter6GOVuGqBS8">via GIPHY</a></p></div>
+  </div>
 
-@main("Welcome to Play") {
 
-    <p>@message</p>
+  <div class="blue-grey darken-4">
+    <div class="container">
+      <div class="section">
 
+        <!--   Icon Section   -->
+        <div class="row">
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center white-text"><i class="material-icons">location_on</i></h2>
+              <h5 class="center light white-text">Locate</h5>
+
+              <p class="light white-text">
+                We use the Foursquare API to locate any places within 100 meters
+                of your location. Then we have a list of venues you might be
+                looking at. For each of the possible venues we retrieve a
+                set of photographs from Foursquare.
+              </p>
+            </div>
+          </div>
+
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center white-text"><i class="material-icons">code</i></h2>
+              <h5 class="center light white-text">Train</h5>
+
+              <p class="light white-text">
+                We create a custom Clarifai model and train it with the pictures
+                of nearby venues. Each set of pictures is assigned a label of
+                the venue name so we can identify similar pictures later.
+              </p>
+            </div>
+          </div>
+
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center white-text"><i class="material-icons">label</i></h2>
+              <h5 class="center light white-text">Predict</h5>
+
+              <p class="light white-text">
+                Take a picture submit it to the server. The server then sends
+                The picture to the specially trained Clarifai model.
+                Clarifai then predicts the best location match based on the
+                training data provided.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 }
