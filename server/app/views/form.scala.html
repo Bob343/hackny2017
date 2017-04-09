@@ -1,0 +1,8 @@
+@main("Form") {
+  @helper.form(action = routes.ApplicationController.upload, 'enctype -> "multipart/form-data") {
+    <label>Latitude:</label><input type="text" name="lat" /></br>
+    <label>Longitude:</label><input type="text" name="lon" /></br>
+    <lable>Picture:</lable><input type="file" name="image" /></br>
+    <input type="submit" value="Submit" />
+  }
+}
