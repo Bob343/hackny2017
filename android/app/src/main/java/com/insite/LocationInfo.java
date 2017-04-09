@@ -1,6 +1,7 @@
 package com.insite;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.util.Iterator;
 
 public class LocationInfo extends AppCompatActivity {
@@ -26,7 +28,7 @@ public class LocationInfo extends AppCompatActivity {
     public static final String IMAGE = "image";
 
     protected String mTitle;
-//    protected Bitmap mImage;
+    protected String mImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,8 @@ public class LocationInfo extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
 
         mTitle = extras.getString(TITLE);
-//        mImage = extras.getParcelable(IMAGE);
+        mImage = extras.getString(IMAGE);
+
 
         setupDefaults();
     }
@@ -48,6 +51,23 @@ public class LocationInfo extends AppCompatActivity {
 
         TextView titleView = (TextView) findViewById(R.id.info_title);
         titleView.setText(mTitle);
+
+        ImageView imageView = (ImageView) findViewById(R.id.info_image);
+        imageView.setImageBitmap(getImageFromPath(IMAGE));
+    }
+
+    public Bitmap getImageFromPath(String path) {
+
+        Bitmap map;
+
+        try {
+            map = BitmapFactory.decodeStream(this.openFileInput(path));
+        }
+        catch (IOException e) {
+            Log.e(LOG_TAG,e.getLocalizedMessage());
+            map = BitmapFactory.decodeResource(getResources(), R.drawable.placeholder);
+        }
+        return map;
     }
 
     public void showProgressBar() {
@@ -98,6 +118,7 @@ public class LocationInfo extends AppCompatActivity {
                     .appendQuery("titles",strings[0])
                     .appendQuery("exintro","true")
                     .appendQuery("explaintext","true")
+                    .appendQuery("redirects","1")
                     .build();
             return conn.connect("GET");
         }

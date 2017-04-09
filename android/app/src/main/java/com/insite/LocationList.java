@@ -2,6 +2,8 @@ package com.insite;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,17 +16,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.net.URL;
 
 public class LocationList extends AppCompatActivity {
-
-    ListView listview;
-    Context context;
+    protected Context mContext;
 
     public static final String LOG_TAG = LocationList.class.getSimpleName();
-    private ProgressBar mProgress;
-    private int mProgressStatus  = 0;
-
-    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,41 +30,12 @@ public class LocationList extends AppCompatActivity {
 
         setTitle("Nearby Matches");
 
-        String[] names;
-        String[] addresses;
-        Bitmap[] images;
-        String[] imageUrls;
+        
+        mContext = this;
 
-        //get json from file //TODO: Get from url
-        try {
-            String json = loadJSONFromDemo();
-            Log.v(LOG_TAG,json);
-            JSONObject jObj = new JSONObject(json);
-            JSONArray jArr = jObj.getJSONArray("locations");
+        String json = loadJSONFromDemo();
 
-            int size = jArr.length();
-            names = new String[size];
-            addresses = new String[size];
-            imageUrls = new String[size];
-
-            for (int i=0; i<size; i++) {
-                JSONObject obj = jArr.getJSONObject(i);
-                names[i] = obj.getString("name");
-                addresses[i] = obj.getString("address");
-                imageUrls[i] = obj.getString("image");
-            }
-
-            //convert imageUrls to array of Bitmaps
-            images = new Bitmap[imageUrls.length];
-
-            //load into imageView
-            context = this;
-            listview = (ListView) findViewById(R.id.LocationListView);
-            listview.setAdapter(new CustomAdapter(this, names, addresses, images));
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        new FetchImagesAsyncTask().execute(json);
     }
 
     private String loadJSONFromDemo() {
@@ -86,6 +54,56 @@ public class LocationList extends AppCompatActivity {
         return json;
     }
 
+    private class FetchImagesAsyncTask extends AsyncTask<String, Void, Void> {
 
+        protected Holder[] mHolders;
 
+        @Override
+        protected Void doInBackground(String... strings) {
+            try {
+                JSONObject jObj = new JSONObject(strings[0]);
+                JSONArray jArr = jObj.getJSONArray("sites");
+
+                int size = jArr.length();
+                mHolders = new Holder[size];
+
+                for (int i=0; i<size; i++) {
+                    JSONObject obj = jArr.getJSONObject(i).getJSONObject("site");
+                    mHolders[i] = new Holder();
+                    mHolders[i].tvName = obj.getString("name");
+                    mHolders[i].tvAddress = obj.getString("address");
+                    mHolders[i].img = getImageFromUrl(obj.getString("image"));
+                    mHolders[i].prog = obj.getInt("confidence");
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        public Bitmap getImageFromUrl(String url) {
+
+            Bitmap map = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.placeholder);
+
+            try {
+                URL conn = new URL(url);
+                map = BitmapFactory.decodeStream(conn.openConnection().getInputStream());
+            }
+            catch (IOException e) {
+                Log.e(LOG_TAG, e.getLocalizedMessage());
+            }
+
+            return map;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            ListView listview = (ListView) findViewById(R.id.LocationListView);
+            listview.setAdapter(new ListAdapter(mContext, R.layout.location_list, mHolders));
+        }
+    }
 }

@@ -30,7 +30,6 @@
         <activity android:name=".LocationInfo"/>
         <activity android:name=".ImageUploadTest">
         </activity>
-        <activity android:name=".MainActivity2"/>
     </application>
 
 </manifest>

@@ -14,15 +14,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Intent intent = new Intent(this, LocationList.class);
-//        startActivity(intent);
+
     }
 
     public void UPLOAD_ACTIVITY(View view) {
 
-        Intent intent = new Intent(this, LocationInfo.class);
+        Intent intent = new Intent(this, ImageUploadTest.class);
         intent.putExtra(LocationInfo.TITLE,"Courant Institute of Mathematical Sciences");
 
         startActivity(intent);
+    }
+
+    public void LIST_ACTIVITY(View view) {
+        Intent intent = new Intent(this, LocationList.class);
+        startActivity(intent);
+
     }
 }

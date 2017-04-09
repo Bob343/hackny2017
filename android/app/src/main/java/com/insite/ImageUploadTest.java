@@ -39,7 +39,8 @@ import java.util.Date;
 public class ImageUploadTest extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    public static final String SERVER = "http://172.27.223.193/phototest/";
+//    public static final String SERVER = "https://serene-refuge-17558.herokuapp.com/upload";
+    public static final String SERVER = "http://172.27.223.193/phototest";
     public static final String IMAGE = "IMG_20170203_223045.jpg";
 
     public static final String LOG_TAG = ImageUploadTest.class.getSimpleName();
@@ -122,7 +123,7 @@ public class ImageUploadTest extends AppCompatActivity implements
 
     public void TEST_UPLOAD(View view) {
 
-        new ImageUploadAsync().execute(IMAGE);
+//        new ImageUploadAsync().execute(IMAGE);
 
     }
 
@@ -196,8 +197,11 @@ public class ImageUploadTest extends AppCompatActivity implements
                 multipart.addFilePart("image", new File(filePath));
                 multipart.addFormField("title",filePath);
 
-                multipart.addFormField("lat",String.valueOf(mLastLocation.getLatitude()));
-                multipart.addFormField("lon",String.valueOf(mLastLocation.getLongitude()));
+//                multipart.addFormField("lat",String.valueOf(mLastLocation.getLatitude()));
+//                multipart.addFormField("lon",String.valueOf(mLastLocation.getLongitude()));
+
+                multipart.addFormField("lat",String.valueOf(40.749627));
+                multipart.addFormField("lon",String.valueOf(-73.985246));
 
                 multipart.addHeaderField("title",filePath);
                 Log.v(LOG_TAG, multipart.finish());
