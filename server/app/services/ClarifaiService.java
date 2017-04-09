@@ -43,21 +43,24 @@ public class ClarifaiService {
 		}
 	}
 	public static void trainModel(){
-		client.trainModel("insight").executeSync();
+		System.out.println(client.trainModel("insight").executeSync().get().toString());
 		
 	}
 	public static void predictModel(String url){
-
-	client.predict("insight").withInputs(ClarifaiInput.forImage(ClarifaiImage.of(url))).executeSync();
+		while(!model.modelVersion().status().toString().equals("TRAINED"))
+			System.out.println(model.modelVersion().status().toString());
+		System.out.println(client.predict("insight").withInputs(ClarifaiInput.forImage(ClarifaiImage.of(url))).executeSync().get().toString());
 	}
 	public static void run(ArrayList<ArrayList<String>> args,String url){
 		client = new ClarifaiBuilder(cid,ckey).buildSync();
-		model = client.createModel("insight").withOutputInfo(ConceptOutputInfo.forConcepts(concepts)).executeSync().get();
+		client.deleteModel("insight").executeSync();
 		addConcepts(args);
 		addImages(args);
+		model = client.createModel("insight").withOutputInfo(ConceptOutputInfo.forConcepts(concepts)).executeSync().get();
+		System.out.println(model.modelVersion().status().toString());
 		trainModel();
+		System.out.println(model.modelVersion().status().toString());
 		predictModel(url);
-		client.searchInputs(SearchClause.matchImageURL(ClarifaiImage.of(url))).getPage(1).executeSync();
 
 	}
 	public static void main(String[] args){
