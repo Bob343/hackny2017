@@ -1,5 +1,5 @@
 package services;
-
+import java.io.File;
 import java.util.*;
 import clarifai2.api.ClarifaiResponse;
 import clarifai2.api.request.input.SearchClause;
@@ -50,7 +50,7 @@ public class ClarifaiService {
 		Thread.sleep(200);
 		
 	}
-	public static void predictModel(String url)throws Exception{
+	public static void predictModel(File url)throws Exception{
 		while(!client.getModelByID("insight").executeSync().get().modelVersion().status().toString().equals("TRAINED")){
 			Thread.sleep(200);
 		}
@@ -64,7 +64,7 @@ public class ClarifaiService {
 				System.out.println(name+" - "+perc);
 			}
 	}
-	public static void run(ArrayList<ArrayList<String>> args,String url)throws Exception{
+	public static void run(ArrayList<ArrayList<String>> args,File url)throws Exception{
 		client = new ClarifaiBuilder(cid,ckey).buildSync();
 		client.deleteModel("insight").executeSync();
 		addConcepts(args);
