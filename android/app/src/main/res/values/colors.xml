@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="listBackground">#F4F5F7</color>
     <color name="listItemBackground">#FFFFFF</color>
+    <color name="lightGrey">#F4F5F9</color>
+    <color name="lightBlue">#A7BDCC</color>
+    <color name="white">#FFFFFF</color>
 </resources>

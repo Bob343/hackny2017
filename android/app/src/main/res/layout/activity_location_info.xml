@@ -14,7 +14,8 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="250dip"
+        android:layout_marginBottom="8dp"
         android:background="@color/colorPrimaryDark"/>
 
     <TextView
@@ -23,6 +24,9 @@
         android:id="@+id/info_title"
         android:text="@string/dummy_text"
         android:textStyle="bold"
+        android:textSize="28sp"
+        android:layout_marginBottom="10dp"
+        android:textAlignment="center"
         style="@style/Base.TextAppearance.AppCompat.Headline"/>
 
     <ScrollView
@@ -33,7 +37,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/info_body"
-            android:visibility="gone"/>
+            android:textSize="20sp"
+            android:visibility="gone"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"/>
     </ScrollView>
 
 

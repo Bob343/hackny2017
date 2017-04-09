@@ -33,6 +33,8 @@ public class LocationInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_info);
 
+        setTitle("");
+
         Bundle extras = getIntent().getExtras();
 
         mTitle = extras.getString(TITLE);
