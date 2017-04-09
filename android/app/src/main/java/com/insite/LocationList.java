@@ -1,11 +1,9 @@
 package com.insite;
 
 import android.content.Context;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -13,12 +11,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.util.*;
 
 public class LocationList extends AppCompatActivity {
 
     ListView listview;
     Context context;
+
+    public static final String LOG_TAG = LocationList.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +30,7 @@ public class LocationList extends AppCompatActivity {
         //get json from file //TODO: Get from url
         try {
             String json = loadJSONFromDemo();
+            Log.v(LOG_TAG,json);
             JSONObject jObj = new JSONObject(json);
             JSONArray jArr = jObj.getJSONArray("locations");
 
@@ -57,7 +57,7 @@ public class LocationList extends AppCompatActivity {
     private String loadJSONFromDemo() {
         String json = null;
         try {
-            InputStream is = getResources().getAssets().open("example.json");
+            InputStream is = getResources().openRawResource(R.raw.example);
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
