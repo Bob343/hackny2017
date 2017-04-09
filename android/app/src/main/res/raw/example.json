@@ -1,0 +1,44 @@
+{
+  "sites": [
+    {
+      "site": {
+        "image": "https://thenypost.files.wordpress.com/2015/07/empire-state-building.jpg?quality=90&strip=all&w=1200",
+        "name": "Empire State Building",
+        "address": "350 5th Avenue, New York, NY 10118",
+        "confidence": "90"
+      }
+    },
+    {
+      "site": {
+        "image": "https://media2.s-nbcnews.com/j/newscms/2015_31/1146871/150729-150728-trump-tower-1601_19ec6c7edf59f1e054f6f3f22c742817.nbcnews-fp-1200-800.jpg",
+        "name": "Trump Tower",
+        "address": "725 5th Avenue, New York, NY 10022",
+        "confidence": "75"
+      }
+    },
+    {
+      "site": {
+        "image": "http://www.nycgo.com/images/venues/2086/carnegie_hall_exterior__x_large.jpg",
+        "name": "Carnegie Hall",
+        "address": "881 7th Avenue, New York, NY 10019",
+        "confidence": "35"
+      }
+    },
+    {
+      "site": {
+        "image": "https://www.newyorkpass.com/images/nyc-attractions/attraction-images-670x270/AttImg_TouratLincolnCenter1_large.jpg",
+        "name": "Lincoln Center",
+        "address": "10 Lincoln Center Plaza, New York, NY 10023",
+        "confidence": "20"
+      }
+    },
+    {
+      "site": {
+        "image": "http://iyftc1oqf704bytwz45ub151.wpengine.netdna-cdn.com/wp-content/uploads/2016/02/webster-hall-outside-nyc.jpg",
+        "name": "Webster Hall",
+        "address": "125 E 11th Street, New York, NY 10003",
+        "confidence": "6"
+      }
+    }
+  ]
+}

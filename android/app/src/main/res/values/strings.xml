@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">InSite</string>
+    <string name="take_photo">Show List</string>
+    <string name="get_from_wikipedia">Get From Wikipedia</string>
+    <string name="dummy_text">Dummy Text</string>
+    <string name="not_found">No Information Found</string>
+</resources>
