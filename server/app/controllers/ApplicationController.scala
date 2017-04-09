@@ -30,8 +30,8 @@ class ApplicationController @Inject()(val messagesApi: MessagesApi,
 
     request.body.file("image").map { image =>
       val imageFile = image.ref.file
-      cs.run(trainingPhotos, imageFile)
-      Ok("Stuff happened")
+      val prediction = cs.run(trainingPhotos, imageFile)
+      Ok(prediction)
     }.get
   }
 

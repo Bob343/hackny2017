@@ -1,6 +1,9 @@
 package services
 
+import models.SitePrediction
+
 import com.google.gson._
+import java.util.ArrayList
 import scala.collection.JavaConverters._
 
 object JsonService {
@@ -50,6 +53,23 @@ object JsonService {
     response.get("photos")
             .getAsJsonObject
             .getAsJsonArray("items")
+
+  // Prediction serialization functions
+
+  def serializePredictions(predictions: ArrayList[ArrayList[String]]): String = {
+    val sb = new StringBuilder("{\"sites\": [")
+    predictions.asScala.foreach { prediction =>
+      sb.append(serializePrediction(prediction))
+      sb.append(",")
+    }
+
+    s"""${sb.substring(0, sb.size - 1)}]}"""
+  }
+
+  def serializePrediction(vals: ArrayList[String]): String = {
+    val pred = SitePrediction(vals.get(0), vals.get(1), vals.get(2), vals.get(3))
+    pred.toJson
+  }
 
   // Helper functions
 
