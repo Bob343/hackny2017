@@ -21,18 +21,19 @@ class ApplicationController @Inject()(val messagesApi: MessagesApi,
   }
 
   def upload = Action(parse.multipartFormData) { implicit request =>
-    val formData = request.body.asFormUrlEncoded
+    /*val formData = request.body.asFormUrlEncoded
     val lat = parseDouble(formData.get("lat"))
     val lon = parseDouble(formData.get("lon"))
     val trainingPhotos = fs.venuePhotos(lat, lon)
-    println(trainingPhotos)
-    println(trainingPhotos.size)
+
+    println(request.body)
 
     request.body.file("image").map { image =>
       val imageFile = image.ref.file
       val prediction = cs.run(trainingPhotos, imageFile)
       Ok(prediction)
-    }.get
+    }.get*/
+    Ok(request.body.toString)
   }
 
   def parseDouble(os: Option[Seq[String]]): Double =

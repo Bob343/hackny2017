@@ -8,6 +8,4 @@ case class SitePrediction(name: String, address: String, imgUrl: String, confide
           "image": "${this.imgUrl}",
           "confidence": "${this.confidence}"
         }}"""
-
-    //s"{"site\": {\"name\": ${this.name}, \"address\": ${this.address}, \"image\": ${this.imgUrl}, \"confidence\": ${this.confidence}}}"
 }
