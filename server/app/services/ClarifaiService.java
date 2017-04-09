@@ -78,7 +78,7 @@ public class ClarifaiService {
 		}
 		return arrs;
 	}
-	public String run(ArrayList<ArrayList<String>> args,File url)throws Exception{
+	/*public String run(ArrayList<ArrayList<String>> args,File url)throws Exception{
 		client = new ClarifaiBuilder(cid,ckey).buildSync();
 		client.deleteModel("insight").executeSync();
 		pairs = args;
@@ -88,6 +88,18 @@ public class ClarifaiService {
 		trainModel();
 
 		return JsonService.serializePredictions(predictModel(url));
+
+	}*/
+	public ArrayList<ArrayList<String>> run(ArrayList<ArrayList<String>> args,File url)throws Exception{
+		client = new ClarifaiBuilder(cid,ckey).buildSync();
+		client.deleteModel("insight").executeSync();
+		pairs = args;
+		addConcepts();
+		addImages();
+		model = client.createModel("insight").withOutputInfo(ConceptOutputInfo.forConcepts(concepts)).executeSync().get();
+		trainModel();
+
+		return predictModel(url);
 
 	}
 	public void main(String[] args)throws Exception{

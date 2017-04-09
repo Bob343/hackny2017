@@ -1,10 +1,12 @@
 package controllers
 
+import models.SitePrediction
 import services.ClarifaiService
 import services.FoursquareService
 
 import akka.actor.ActorSystem
 import java.io.File
+import java.util.ArrayList
 import javax.inject._
 import play.api._
 import play.api.data._
@@ -12,6 +14,7 @@ import play.api.data.Forms._
 import play.api.mvc._
 import play.api.i18n.I18nSupport
 import play.api.i18n.MessagesApi
+import scala.collection.JavaConverters._
 import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.concurrent.duration._
 
@@ -31,15 +34,23 @@ class ApplicationController @Inject()(val messagesApi: MessagesApi,
 
     request.body.file("image").map {
       image => getFuturePrediction(lat,lon,image.ref.file).map {
-        prediction => Ok(prediction)
+        prediction => Ok(views.html.display(prediction))
       }
     }.get
   }
 
-  private def getFuturePrediction(lat: Double, lon: Double, image: File): Future[String] = {
+  /*private def getFuturePrediction(lat: Double, lon: Double, image: File): Future[String] = {
     Future {
       val trainingPhotos = fs.venuePhotos(lat, lon)
       cs.run(trainingPhotos, image)
+    }
+  }*/
+
+  private def getFuturePrediction(lat: Double, lon: Double, image: File): Future[List[SitePrediction]] = {
+    Future {
+      val trainingPhotos = fs.venuePhotos(lat, lon)
+      val arrLists = cs.run(trainingPhotos, image).asScala.toList
+      arrLists.map { ls => SitePrediction(ls.get(0), ls.get(1), ls.get(2), ls.get(3)) }
     }
   }
 
@@ -49,4 +60,9 @@ class ApplicationController @Inject()(val messagesApi: MessagesApi,
     } catch {
       case _ : Throwable => 0.0
     }
+
+  def display = Action {
+    val ls = List(SitePrediction("place", "location", "image", "confidence"))
+    Ok(views.html.display(ls))
+  }
 }
