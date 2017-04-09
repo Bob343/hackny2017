@@ -13,7 +13,11 @@ class FoursquareService @Inject()(config: Configuration) {
   def debug =
     s"Client ID: ${CLIENT_ID}, Client Secret: ${CLIENT_SECRET}"
 
-  def findVenues(lat: Double, lon: Double) = {
+  /** Retrieves a list of Venues within 100 meters of (lat, lon) from the
+   *  Foursquare API, and extracts the Venue IDs and Venue names from the
+   *  JSON response
+   */
+  def findVenues(lat: Double, lon: Double): List[(String,String)] = {
     val url = "https://api.foursquare.com/v2/venues/search"
     val foursquareResponse =
       Http(url).param("client_id", CLIENT_ID)
@@ -22,11 +26,30 @@ class FoursquareService @Inject()(config: Configuration) {
          .param("ll", s"${lat.toString},${lon.toString}")
          .param("radius", "100")
          .param("intent", "browse")
-         //.asString
-         .execute(parser = {inputstream =>
-           JsonService.parse[Map[String,String]](inputstream)
-         })
+         .asString
 
-    foursquareResponse.toString
+      JsonService.extractIdsAndNames(foursquareResponse.body)
+  }
+
+  /** Maps a list of venues in the form (Venue ID, Venue Name) to a list of
+   *  the form (Venue Photo URLs, Venue Name) where the Venue Photo URLs
+   *  are in a List of Strings
+   */
+  def venuePhotos(venueList: List[(String,String)]): List[(List[String], String)] =
+    venueList.map { x =>
+      (getPhotos(x._1), x._2)
+    }.filter { x =>
+      !x._1.isEmpty
+    }
+
+  def getPhotos(venueId: String): List[String] = {
+    val url = s"https://api.foursquare.com/v2/venues/${venueId}/photos"
+    val foursquareResponse =
+      Http(url).param("client_id", CLIENT_ID)
+         .param("client_secret", CLIENT_SECRET)
+         .param("v", "20130815")
+         .asString
+
+    JsonService.extractPhotoUrls(foursquareResponse.body)
   }
 }

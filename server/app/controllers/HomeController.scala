@@ -10,6 +10,8 @@ import play.api.mvc._
 class HomeController @Inject()(fs: FoursquareService) extends Controller {
 
   def index = Action {
-    Ok(views.html.index(fs.findVenues(40.728736,-73.995337)))
+    val venues = fs.findVenues(40.728736,-73.995337)
+    val photos = fs.venuePhotos(venues)
+    Ok(views.html.index(photos.toString))
   }
 }
