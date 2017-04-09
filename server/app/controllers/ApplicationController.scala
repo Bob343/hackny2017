@@ -1,5 +1,8 @@
 package controllers
 
+import services.FoursquareService
+
+import java.io.File
 import javax.inject._
 import play.api._
 import play.api.data._
@@ -9,7 +12,7 @@ import play.api.i18n.I18nSupport
 import play.api.i18n.MessagesApi
 
 @Singleton
-class ApplicationController @Inject()(val messagesApi: MessagesApi) extends Controller with I18nSupport {
+class ApplicationController @Inject()(val messagesApi: MessagesApi, fs: FoursquareService) extends Controller with I18nSupport {
 
   def uploadForm = Action {
     Ok(views.html.form())
