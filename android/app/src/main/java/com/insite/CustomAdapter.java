@@ -83,6 +83,7 @@ public class CustomAdapter extends BaseAdapter {
                 context.startActivity(intent);
             }
         });
+        rowView.setTag(holder);
         return rowView;
     }
 }
