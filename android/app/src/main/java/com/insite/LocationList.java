@@ -1,10 +1,13 @@
 package com.insite;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,14 +21,22 @@ public class LocationList extends AppCompatActivity {
     Context context;
 
     public static final String LOG_TAG = LocationList.class.getSimpleName();
+    private ProgressBar mProgress;
+    private int mProgressStatus  = 0;
+
+    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_list);
 
-        context = this;
-        listview = (ListView) findViewById(R.id.LocationListView);
+        setTitle("Nearby Matches");
+
+        String[] names;
+        String[] addresses;
+        Bitmap[] images;
+        String[] imageUrls;
 
         //get json from file //TODO: Get from url
         try {
@@ -34,24 +45,29 @@ public class LocationList extends AppCompatActivity {
             JSONObject jObj = new JSONObject(json);
             JSONArray jArr = jObj.getJSONArray("locations");
 
-            for (int i=0; i<jArr.length(); i++) {
+            int size = jArr.length();
+            names = new String[size];
+            addresses = new String[size];
+            imageUrls = new String[size];
+
+            for (int i=0; i<size; i++) {
                 JSONObject obj = jArr.getJSONObject(i);
-                System.out.println(obj.getString("name")); //debug //TODO: Load into listview
+                names[i] = obj.getString("name");
+                addresses[i] = obj.getString("address");
+                imageUrls[i] = obj.getString("image");
             }
+
+            //convert imageUrls to array of Bitmaps
+            images = new Bitmap[imageUrls.length];
+
+            //load into imageView
+            context = this;
+            listview = (ListView) findViewById(R.id.LocationListView);
+            listview.setAdapter(new CustomAdapter(this, names, addresses, images));
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-
-//        ArrayAdapter adapter = new ArrayAdapter();
-
-        //set image (test)
-//        Image image;
-//        image = (ImageView) findViewById(R.id.locationImage);
-
-        //change image with image.setImageResource(R.drawable.android);
-
     }
 
     private String loadJSONFromDemo() {
