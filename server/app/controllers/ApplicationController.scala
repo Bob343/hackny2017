@@ -20,7 +20,7 @@ class ApplicationController @Inject()(val messagesApi: MessagesApi,
     Ok(views.html.form())
   }
 
-  def upload = Action(parse.multipartFormData) { implicit request =>
+  def upload = Action { implicit request =>//(parse.multipartFormData) { implicit request =>
     /*val formData = request.body.asFormUrlEncoded
     val lat = parseDouble(formData.get("lat"))
     val lon = parseDouble(formData.get("lon"))
