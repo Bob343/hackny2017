@@ -11,7 +11,7 @@ class HomeController @Inject()(fs: FoursquareService) extends Controller {
 
   def index = Action {
     val venues = fs.findVenues(40.728736,-73.995337)
-    val photos = fs.venuePhotos(venues)
+    val photos = fs.venuePhotosAsArrayList(fs.venuePhotos(venues))
     Ok(views.html.index(photos.toString))
   }
 }

@@ -1,5 +1,6 @@
 package services
 
+import java.util.ArrayList
 import javax.inject.Inject
 import javax.inject.Singleton
 import play.api.Configuration
@@ -29,6 +30,23 @@ class FoursquareService @Inject()(config: Configuration) {
          .asString
 
       JsonService.extractIdsAndNames(foursquareResponse.body)
+  }
+
+  /** Reformats List of Tuples with Photo URLs and Venue name
+   *  to a Java ArrayList with the first index as the name and
+   *  subsequent items as the URLs
+   */
+  def venuePhotosAsArrayList(venuePhotos: List[(List[String], String)]): ArrayList[ArrayList[String]] = {
+    val arrPhotos = new ArrayList[ArrayList[String]]()
+    venuePhotos.foreach { tuple =>
+      val arr = new ArrayList[String]()
+      arr.add(tuple._2)
+      tuple._1.foreach { url =>
+        arr.add(url)
+      }
+      arrPhotos.add(arr)
+    }
+    return arrPhotos
   }
 
   /** Maps a list of venues in the form (Venue ID, Venue Name) to a list of
