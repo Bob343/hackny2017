@@ -12,28 +12,28 @@
       "image" : "example-2.jpg",
       "name" : "Trump Tower",
       "address" : "725 5th Avenue, New York, NY 10022",
-      "information" : ""
+      "information" : "Trump Tower is a 58-story, 664-foot-high (202 m) mixed-use skyscraper located at 721–725 Fifth Avenue between 56th and 57th Streets in Midtown Manhattan, New York City. Trump Tower serves as the headquarters for The Trump Organization."
     },
     {
       "location_id" : "3",
       "image" : "example-3.jpg",
-      "name" : "",
-      "address" : "",
-      "information" : ""
+      "name" : "Lincoln Center",
+      "address" : "10 Lincoln Center Plaza, New York, NY 10023",
+      "information" : "Lincoln Center for the Performing Arts is a 16.3-acre (6.6-hectare) complex of buildings in the Lincoln Square neighborhood of the borough of Manhattan in New York City. It hosts many notable performing arts organizations, which are nationally and internationally renowned, including the New York Philharmonic, the Metropolitan Opera, and the New York City Ballet."
     },
     {
       "location_id" : "4",
       "image" : "example-4.jpg",
-      "name" : "",
-      "address" : "",
-      "information" : ""
+      "name" : "Webster Hall",
+      "address" : "125 E 11th Street, New York, NY 10003",
+      "information" : "Webster Hall is a nightclub and concert venue located at 125 East 11th Street, between Third and Fourth Avenues, near Astor Place, in the East Village of Manhattan, New York City. Built in 1886, its current incarnation was opened by the Ballinger Brothers in 1992. It serves as a nightclub, concert venue, corporate events space, and recording studio, has a capacity of 2,500 people – including the club;"
     },
     {
       "location_id" : "5",
       "image" : "example-5.jpg",
-      "name" : "",
-      "address" : "",
-      "information" : ""
+      "name" : "Carnegie Hall",
+      "address" : "881 7th Avenue, New York, NY 10019",
+      "information" : "Carnegie Hall is a concert venue in Midtown Manhattan in New York City, United States, located at 881 Seventh Avenue, occupying the east side of Seventh Avenue between West 56th Street and West 57th Street, two blocks south of Central Park."
     }
   ]
 }
