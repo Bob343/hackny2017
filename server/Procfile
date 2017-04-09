@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/hackny2017 -Dhttp.port=${PORT}
+web: target/universal/stage/bin/insight -Dhttp.port=${PORT}
