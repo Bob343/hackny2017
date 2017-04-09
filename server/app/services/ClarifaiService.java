@@ -19,16 +19,18 @@ import clarifai2.dto.model.output.ClarifaiOutput;
 import clarifai2.dto.prediction.Concept;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
-
+@Singleton
 public class ClarifaiService {
-	public static String cid = "rCvdeyQM1h8dcVSR5f0VgSE-EiZmyJwCuWNPXAxo";
-	public static String ckey = "A7bbZUK0cQIwWFq55R3Uql_TS_o85tOA0k4YXqQk";
-	public static ClarifaiClient client;
-	public static ConceptModel model;
-	public static List<Concept> concepts = new ArrayList<Concept>();
+	public String cid = "rCvdeyQM1h8dcVSR5f0VgSE-EiZmyJwCuWNPXAxo";
+	public String ckey = "A7bbZUK0cQIwWFq55R3Uql_TS_o85tOA0k4YXqQk";
+	public ClarifaiClient client;
+	public ConceptModel model;
+	public List<Concept> concepts = new ArrayList<Concept>();
 
-	public static void addConcepts(ArrayList<ArrayList<String>> pairs){
+	public void addConcepts(ArrayList<ArrayList<String>> pairs){
 		for(int i =0 ; i<pairs.size(); i++){
 			Concept cnc = Concept.forID(pairs.get(i).get(0));
 			if(!concepts.contains(cnc))
@@ -38,23 +40,23 @@ public class ClarifaiService {
 		client.addConcepts().plus(concepts).executeSync();
 
 	}
-	public static void addImages(ArrayList<ArrayList<String>> pairs)throws Exception{
+	public void addImages(ArrayList<ArrayList<String>> pairs)throws Exception{
 		for(int i =0; i < pairs.size();i++){
 			for(int j = 1; j < pairs.get(i).size();j++)
 				client.addInputs().plus(ClarifaiInput.forImage(ClarifaiImage.of(pairs.get(i).get(j))).withConcepts(Concept.forID(pairs.get(i).get(0)))).executeSync();
 				Thread.sleep(200);
 		}
 	}
-	public static void trainModel()throws Exception{
+	public void trainModel()throws Exception{
 		System.out.println(client.trainModel("insight").executeSync().get().toString());
 		Thread.sleep(200);
-		
+
 	}
-	public static void predictModel(File url)throws Exception{
+	public void predictModel(File url)throws Exception{
 		while(!client.getModelByID("insight").executeSync().get().modelVersion().status().toString().equals("TRAINED")){
 			Thread.sleep(200);
 		}
-		
+
 			List<Prediction> ls = client.predict("insight").withInputs(ClarifaiInput.forImage(ClarifaiImage.of(url))).executeSync().get().get(0).data();
 			Thread.sleep(200);
 			for(Prediction p:ls){
@@ -64,19 +66,19 @@ public class ClarifaiService {
 				System.out.println(name+" - "+perc);
 			}
 	}
-	public static void run(ArrayList<ArrayList<String>> args,File url)throws Exception{
+	public void run(ArrayList<ArrayList<String>> args,File url)throws Exception{
 		client = new ClarifaiBuilder(cid,ckey).buildSync();
 		client.deleteModel("insight").executeSync();
 		addConcepts(args);
 		addImages(args);
 		model = client.createModel("insight").withOutputInfo(ConceptOutputInfo.forConcepts(concepts)).executeSync().get();
 		trainModel();
-		
+
 		predictModel(url);
 
 	}
-	public static void main(String[] args)throws Exception{
-		System.out.println("Start run");
+	public void main(String[] args)throws Exception{
+		/*System.out.println("Start run");
 		ArrayList<String> arr = new ArrayList<String>();
 		arr.add("One WTC");
 		arr.add("https://cdn0.vox-cdn.com/uploads/chorus_asset/file/4802093/1wtc-wtcprogress.0.jpg");
@@ -96,6 +98,6 @@ public class ClarifaiService {
 		arrs.add(arr);
 		run(arrs,"https://res.cloudinary.com/protenders/image/upload/orcsgd4ssmkp2kib1mxj.jpg");
 		predictModel("https://www.askideas.com/media/39/Awesome-Empire-State-Building-Picture.jpg");
-		System.out.println("Done running");
+		System.out.println("Done running");*/
 	}
 }

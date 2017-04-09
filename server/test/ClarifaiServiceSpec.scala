@@ -7,6 +7,7 @@ import org.scalatest.Matchers
 
 class ClarifaiServiceSpec extends FlatSpec with Matchers {
   "The ClarifaiService" should "do some stuff" in {
-    ClarifaiService.main(new Array[String](0))
+    val cs = new ClarifaiService
+    cs.main(new Array[String](0))
   }
 }

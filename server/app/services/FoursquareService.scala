@@ -14,6 +14,12 @@ class FoursquareService @Inject()(config: Configuration) {
   def debug =
     s"Client ID: ${CLIENT_ID}, Client Secret: ${CLIENT_SECRET}"
 
+  def venuePhotos(lat: Double, lon: Double): ArrayList[ArrayList[String]] = {
+    val venues = findVenues(lat, lon)
+    val photoList = venuePhotos(venues)
+    venuePhotosAsArrayList(photoList)
+  }
+
   /** Retrieves a list of Venues within 100 meters of (lat, lon) from the
    *  Foursquare API, and extracts the Venue IDs and Venue names from the
    *  JSON response
@@ -29,7 +35,7 @@ class FoursquareService @Inject()(config: Configuration) {
          .param("intent", "browse")
          .asString
 
-      JsonService.extractIdsAndNames(foursquareResponse.body)
+      JsonService.extractIdsAndNames(foursquareResponse.body).take(10)
   }
 
   /** Reformats List of Tuples with Photo URLs and Venue name
