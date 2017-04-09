@@ -15,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 
@@ -22,13 +23,23 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
+import com.insite.util.ApiConnection;
 import com.insite.util.MultipartUtility;
 
+import net.gotev.uploadservice.MultipartUploadRequest;
+import net.gotev.uploadservice.UploadNotificationConfig;
+import net.gotev.uploadservice.UploadService;
+import net.gotev.uploadservice.okhttp.OkHttpStack;
+
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -57,6 +68,10 @@ public class ImageUploadTest extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_upload_test);
         setUpGoogleApi();
+
+        UploadService.NAMESPACE = BuildConfig.APPLICATION_ID;
+
+        dispatchTakePictureIntent();
     }
 
     protected void onStart() {
@@ -177,8 +192,10 @@ public class ImageUploadTest extends AppCompatActivity implements
 
     public void CAMERA(View view) {
         Log.v(LOG_TAG, "Taking Picture");
+        Intent intent = new Intent(this, LocationList.class);
+        intent.putExtra("resource",R.raw.example);
 
-        dispatchTakePictureIntent();
+        startActivity(intent);
     }
 
     protected class ImageUploadAsync extends AsyncTask<String, Void, Void> {
@@ -186,8 +203,32 @@ public class ImageUploadTest extends AppCompatActivity implements
         @Override
         protected Void doInBackground(String... strings) {
 
-            postImage(strings[0]);
+//            String resp = uploadImage(strings[0]);
+//            Log.v(LOG_TAG,resp);
             return null;
+        }
+
+        protected String uploadImage(String filePath) {
+
+            UploadService.HTTP_STACK = new OkHttpStack();
+            uploadMultipart(getApplicationContext(), filePath);
+
+            return "";
+        }
+
+        public void uploadMultipart(final Context context, String filePath) {
+            try {
+                String uploadId =
+                        new MultipartUploadRequest(context, SERVER)
+                                // starting from 3.1+, you can also use content:// URI string instead of absolute file
+                                .addFileToUpload(filePath, "image")
+                                .setNotificationConfig(new UploadNotificationConfig())
+                                .setMaxRetries(2)
+                                .startUpload();
+                Log.v(LOG_TAG,uploadId);
+            } catch (Exception exc) {
+                Log.e("AndroidUploadService", exc.getMessage(), exc);
+            }
         }
 
         protected String postImage(String filePath) {
@@ -210,6 +251,15 @@ public class ImageUploadTest extends AppCompatActivity implements
             }
 
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void s) {
+
+//            Log.v(LOG_TAG,s);
+            Intent intent = new Intent(getApplicationContext(),LocationList.class);
+            intent.putExtra("resource",R.raw.chelsea);
+            startActivity(intent);
         }
     }
 }

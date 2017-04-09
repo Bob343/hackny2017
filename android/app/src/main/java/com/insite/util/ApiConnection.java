@@ -52,7 +52,7 @@ public class ApiConnection {
     public ApiConnection build() {
         uri = builder.build();
 
-        Log.v(LOG_TAG, "Built URI " + builder.toString());
+//        Log.v(LOG_TAG, "Built URI " + builder.toString());
         return this;
     }
 

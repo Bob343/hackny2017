@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.Environment;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -89,6 +90,7 @@ public class ListAdapter extends ArrayAdapter<Holder> {
                     intent.putExtra(LocationInfo.TITLE,item.tvName);
                     String path = createImageFromBitmap(item.img);
                     intent.putExtra(LocationInfo.IMAGE, path);
+                    Log.v(LOG_TAG,path);
 
                     getContext().startActivity(intent);
 

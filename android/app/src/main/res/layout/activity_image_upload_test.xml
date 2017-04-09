@@ -18,13 +18,7 @@
         android:id="@+id/photo_button1"
         android:onClick="CAMERA"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TEST"
-        android:id="@+id/test_button"
-        android:onClick="TEST_UPLOAD"
-        android:layout_alignParentBottom="true"/>
+
 
 
 </RelativeLayout>

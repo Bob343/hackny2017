@@ -41,6 +41,7 @@ public class LocationInfo extends AppCompatActivity {
 
         mTitle = extras.getString(TITLE);
         mImage = extras.getString(IMAGE);
+        Log.v(LOG_TAG,mImage);
 
 
         setupDefaults();
@@ -61,7 +62,8 @@ public class LocationInfo extends AppCompatActivity {
         Bitmap map;
 
         try {
-            map = BitmapFactory.decodeStream(this.openFileInput(path));
+            Log.v(LOG_TAG,path);
+            map = BitmapFactory.decodeStream(this.openFileInput("myImage.jpg"));
         }
         catch (IOException e) {
             Log.e(LOG_TAG,e.getLocalizedMessage());

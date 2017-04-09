@@ -20,6 +20,7 @@ import java.net.URL;
 
 public class LocationList extends AppCompatActivity {
     protected Context mContext;
+    protected int mResource;
 
     public static final String LOG_TAG = LocationList.class.getSimpleName();
 
@@ -30,6 +31,7 @@ public class LocationList extends AppCompatActivity {
 
         setTitle("Nearby Matches");
 
+        mResource = getIntent().getExtras().getInt("resource");
         
         mContext = this;
 
@@ -41,7 +43,7 @@ public class LocationList extends AppCompatActivity {
     private String loadJSONFromDemo() {
         String json = null;
         try {
-            InputStream is = getResources().openRawResource(R.raw.example);
+            InputStream is = getResources().openRawResource(mResource);
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
@@ -85,7 +87,7 @@ public class LocationList extends AppCompatActivity {
 
         public Bitmap getImageFromUrl(String url) {
 
-            Bitmap map = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.placeholder);
+            Bitmap map;
 
             try {
                 URL conn = new URL(url);
@@ -93,6 +95,7 @@ public class LocationList extends AppCompatActivity {
             }
             catch (IOException e) {
                 Log.e(LOG_TAG, e.getLocalizedMessage());
+                map = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.placeholder);
             }
 
             return map;
