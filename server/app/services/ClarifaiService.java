@@ -28,9 +28,10 @@ public class ClarifaiService {
 	public String ckey = "A7bbZUK0cQIwWFq55R3Uql_TS_o85tOA0k4YXqQk";
 	public ClarifaiClient client;
 	public ConceptModel model;
+	public ArrayList<ArrayList<String>> pairs;
 	public List<Concept> concepts = new ArrayList<Concept>();
 
-	public void addConcepts(ArrayList<ArrayList<String>> pairs){
+	public void addConcepts(){
 		for(int i =0 ; i<pairs.size(); i++){
 			Concept cnc = Concept.forID(pairs.get(i).get(0));
 			if(!concepts.contains(cnc))
@@ -40,9 +41,9 @@ public class ClarifaiService {
 		client.addConcepts().plus(concepts).executeSync();
 
 	}
-	public void addImages(ArrayList<ArrayList<String>> pairs)throws Exception{
+	public void addImages()throws Exception{
 		for(int i =0; i < pairs.size();i++){
-			for(int j = 1; j < pairs.get(i).size();j++)
+			for(int j = 2; j < pairs.get(i).size();j++)
 				client.addInputs().plus(ClarifaiInput.forImage(ClarifaiImage.of(pairs.get(i).get(j))).withConcepts(Concept.forID(pairs.get(i).get(0)))).executeSync();
 				Thread.sleep(200);
 		}
@@ -52,29 +53,41 @@ public class ClarifaiService {
 		Thread.sleep(200);
 
 	}
-	public void predictModel(File url)throws Exception{
+	public ArrayList<ArrayList<String>> predictModel(File url)throws Exception{
 		while(!client.getModelByID("insight").executeSync().get().modelVersion().status().toString().equals("TRAINED")){
 			Thread.sleep(200);
 		}
 
-			List<Prediction> ls = client.predict("insight").withInputs(ClarifaiInput.forImage(ClarifaiImage.of(url))).executeSync().get().get(0).data();
-			Thread.sleep(200);
-			for(Prediction p:ls){
-				Concept c = p.asConcept();
-				int perc = (int)(100*c.value());
-				String name = c.name();
-				System.out.println(name+" - "+perc);
-			}
+		List<Prediction> ls = client.predict("insight").withInputs(ClarifaiInput.forImage(ClarifaiImage.of(url))).executeSync().get().get(0).data();
+		Thread.sleep(200);
+		ArrayList<ArrayList<String>> arrs = new ArrayList<ArrayList<String>>();
+		for(Prediction p:ls){
+			ArrayList<String> arr = new ArrayList<String>();
+			Concept c = p.asConcept();
+			int perc = (int)(100*c.value());
+			String name = c.name();
+			for(ArrayList<String> a:pairs){
+				if(name.equals(a.get(0))){
+					arr.add(name);
+					arr.add(a.get(1));
+					arr.add(a.get(2));
+					arr.add(perc.toString());
+					arrs.add(arr);
+				}
+			}	
+		}
+		return arrs;
 	}
-	public void run(ArrayList<ArrayList<String>> args,File url)throws Exception{
+	public ArrayList<ArrayList<String>> run(ArrayList<ArrayList<String>> args,File url)throws Exception{
 		client = new ClarifaiBuilder(cid,ckey).buildSync();
 		client.deleteModel("insight").executeSync();
-		addConcepts(args);
-		addImages(args);
+		pairs = args;
+		addConcepts();
+		addImages();
 		model = client.createModel("insight").withOutputInfo(ConceptOutputInfo.forConcepts(concepts)).executeSync().get();
 		trainModel();
 
-		predictModel(url);
+		return predictModel(url);
 
 	}
 	public void main(String[] args)throws Exception{
