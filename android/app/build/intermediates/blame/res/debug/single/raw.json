@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/Chris/InSite/android/app/build/intermediates/res/merged/debug/raw/example.json",
+        "source": "/Users/Chris/InSite/android/app/src/main/res/raw/example.json"
+    },
+    {
+        "merged": "/Users/Chris/InSite/android/app/build/intermediates/res/merged/debug/raw/chelsea.json",
+        "source": "/Users/Chris/InSite/android/app/src/main/res/raw/chelsea.json"
+    }
+]

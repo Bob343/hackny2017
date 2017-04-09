@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/Chris/InSite/android/app/build/intermediates/res/merged/debug/drawable-v21/notification_action_background.xml",
+        "source": "/Users/Chris/.android/build-cache/bb693b050203aa4b232d94d8cb3a159c2fd1dcdb/output/res/drawable-v21/notification_action_background.xml"
+    },
+    {
+        "merged": "/Users/Chris/InSite/android/app/build/intermediates/res/merged/debug/drawable-v21/abc_edit_text_material.xml",
+        "source": "/Users/Chris/.android/build-cache/bb693b050203aa4b232d94d8cb3a159c2fd1dcdb/output/res/drawable-v21/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/Users/Chris/InSite/android/app/build/intermediates/res/merged/debug/drawable-v21/abc_action_bar_item_background_material.xml",
+        "source": "/Users/Chris/.android/build-cache/bb693b050203aa4b232d94d8cb3a159c2fd1dcdb/output/res/drawable-v21/abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "/Users/Chris/InSite/android/app/build/intermediates/res/merged/debug/drawable-v21/abc_btn_colored_material.xml",
+        "source": "/Users/Chris/.android/build-cache/bb693b050203aa4b232d94d8cb3a159c2fd1dcdb/output/res/drawable-v21/abc_btn_colored_material.xml"
+    }
+]

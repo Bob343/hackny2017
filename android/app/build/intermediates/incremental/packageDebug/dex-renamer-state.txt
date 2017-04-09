@@ -1,0 +1,7 @@
+#Sun Apr 09 08:39:47 EDT 2017
+base.0=/Users/Chris/InSite/android/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_dad56926a6af1c084bb56946226fd675a4bf8a23
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=/Users/Chris/InSite/android/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_57eca2eeaca988a1c55d200a5a3bde33bb64f99a/classes.dex
+base.1=/Users/Chris/InSite/android/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_57eca2eeaca988a1c55d200a5a3bde33bb64f99a
+file.0=/Users/Chris/InSite/android/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_dad56926a6af1c084bb56946226fd675a4bf8a23/classes.dex

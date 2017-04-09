@@ -1,0 +1,44 @@
+{
+  "sites": [
+    {
+      "site": {
+        "name": "Empire State Building",
+        "address": "West 34th Street",
+        "image": "https://igx.4sqi.net/img/general/640x640/25838598_b_wl2adMvt50iFq-JbOJ7bUtkmEZB1PdamTLwszUf8c.jpg",
+        "confidence": "65"
+      }
+    },
+    {
+      "site": {
+        "name": "Columbia OmniCorp",
+        "address": "14 W 33rd St",
+        "image": "https://igx.4sqi.net/img/general/1440x1920/45690617_DMBeZ1aGDD8V3bPe55bXo0l3OEkMtsI9ec9KZmucGYI.jpg",
+        "confidence": "2"
+      }
+    },
+    {
+      "site": {
+        "name": "Etienne Aigner Showroom",
+        "address": "320 5th Ave",
+        "image": "https://igx.4sqi.net/img/general/720x960/357655_UpMYv2tx-eU-vVQTqcN7b0D4eOnxU9dfZZqk1uZV1Sc.jpg",
+        "confidence": "1"
+      }
+    },
+    {
+      "site": {
+        "name": "Turkish Airlines",
+        "address": "350 5th Ave",
+        "image": "https://igx.4sqi.net/img/general/960x720/1427675_keU4GhI2RkgJ9bHtND7JSIfe7EvqkH_mAhiLBLU6jYI.jpg",
+        "confidence": "1"
+      }
+    },
+    {
+      "site": {
+        "name": "Starbucks Regional Office",
+        "address": "330 5th Ave",
+        "image": "https://igx.4sqi.net/img/general/612x612/6776590_ToiDIfcNn_Xr9iBt8KX7wHmO7JxChmsfvCvV-Xtu3WM.jpg",
+        "confidence": "1"
+      }
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/Chris/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.6.0/69edde9fc4b01c9fd51d25b83428837478c27254/okhttp-3.6.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
+        <dex dex="/Users/Chris/InSite/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-3.6.0_cfce822a5f253d7fc5fee5edccc8e38e94e57280/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Chris/.android/build-cache/79f0f32aa535ae6bf34e385e87748142ef6bb3c5/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="1f03f273033948dfec93bfac93606835a104e662">
+        <dex dex="/Users/Chris/InSite/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_69f020f9ab1034a962ca2b5e08245910dc045004/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Chris/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.11.0/840897fcd7223a8143f1d9b6f69714e7be34fd50/okio-1.11.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="840897fcd7223a8143f1d9b6f69714e7be34fd50">
+        <dex dex="/Users/Chris/InSite/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/okio-1.11.0_93911c488e5b34a5d6498bbff287d0b02fff22b8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Chris/.android/build-cache/5f24f57cacae356a23b3b3d56dcbbdab9f5205e6/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="b2b255d1dec6202e1c64b43bd53198db90b36a98">
+        <dex dex="/Users/Chris/InSite/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_65165c4e642c30a4963fbdddd481831a16e77b40/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Chris/InSite/android/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="/Users/Chris/InSite/android/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_dad56926a6af1c084bb56946226fd675a4bf8a23/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Chris/InSite/android/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="49a758cc6a5e808e3bf1f066a759c6cc480c792a">
+        <dex dex="/Users/Chris/InSite/android/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_57eca2eeaca988a1c55d200a5a3bde33bb64f99a/classes.dex" />
+    </item>
+
+</items>

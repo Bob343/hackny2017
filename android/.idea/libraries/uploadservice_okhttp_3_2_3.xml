@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="uploadservice-okhttp-3.2.3">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.android/build-cache/5f24f57cacae356a23b3b3d56dcbbdab9f5205e6/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/5f24f57cacae356a23b3b3d56dcbbdab9f5205e6/output/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.gotev/uploadservice-okhttp/3.2.3/6f320067c4fe34ca6341543e0abf5a68c5e47f4b/uploadservice-okhttp-3.2.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
