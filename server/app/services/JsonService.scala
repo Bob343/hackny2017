@@ -9,19 +9,26 @@ object JsonService {
 
   // Venue parsing functions
 
-  def extractIdsAndNames(str: String) =
-    getIdsAndNames(extractVenues(str))
+  def extractVals(str: String): List[(String,String,String)] =
+    extractVals(extractVenues(str))
 
   def extractVenues(str: String): List[JsonObject] =
     jsonArrToList(
       getResponse(str).getAsJsonArray("venues")
     )
 
-  def getIdsAndNames(jsonSeq: List[JsonObject]): List[(String,String)] =
+  def extractVals(jsonSeq: List[JsonObject]): List[(String,String,String)] =
     jsonSeq.map { venue =>
       val id = venue.get("id").getAsString
       val name = venue.get("name").getAsString
-      (id, name)
+
+      try {
+        val addr = venue.get("location").getAsJsonObject.get("address").getAsString
+        (id, name, addr)
+      } catch {
+        case _ : Throwable => (id, name, "")
+      }
+
     }
 
   // Photo parsing functions

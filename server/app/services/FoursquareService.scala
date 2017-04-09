@@ -24,7 +24,7 @@ class FoursquareService @Inject()(config: Configuration) {
    *  Foursquare API, and extracts the Venue IDs and Venue names from the
    *  JSON response
    */
-  def findVenues(lat: Double, lon: Double): List[(String,String)] = {
+  def findVenues(lat: Double, lon: Double): List[(String,String,String)] = {
     val url = "https://api.foursquare.com/v2/venues/search"
     val foursquareResponse =
       Http(url).param("client_id", CLIENT_ID)
@@ -35,18 +35,19 @@ class FoursquareService @Inject()(config: Configuration) {
          .param("intent", "browse")
          .asString
 
-      JsonService.extractIdsAndNames(foursquareResponse.body).take(10)
+      JsonService.extractVals(foursquareResponse.body).take(10)
   }
 
   /** Reformats List of Tuples with Photo URLs and Venue name
    *  to a Java ArrayList with the first index as the name and
    *  subsequent items as the URLs
    */
-  def venuePhotosAsArrayList(venuePhotos: List[(List[String], String)]): ArrayList[ArrayList[String]] = {
+  def venuePhotosAsArrayList(venuePhotos: List[(List[String], String, String)]): ArrayList[ArrayList[String]] = {
     val arrPhotos = new ArrayList[ArrayList[String]]()
     venuePhotos.foreach { tuple =>
       val arr = new ArrayList[String]()
       arr.add(tuple._2)
+      arr.add(tuple._3)
       tuple._1.foreach { url =>
         arr.add(url)
       }
@@ -55,13 +56,13 @@ class FoursquareService @Inject()(config: Configuration) {
     return arrPhotos
   }
 
-  /** Maps a list of venues in the form (Venue ID, Venue Name) to a list of
-   *  the form (Venue Photo URLs, Venue Name) where the Venue Photo URLs
+  /** Maps a list of venues in the form (Venue ID, Venue Name, Venue address) to a list of
+   *  the form (Venue Photo URLs, Venue Name, Venue Address) where the Venue Photo URLs
    *  are in a List of Strings
    */
-  def venuePhotos(venueList: List[(String,String)]): List[(List[String], String)] =
+  def venuePhotos(venueList: List[(String,String,String)]): List[(List[String],String,String)] =
     venueList.map { x =>
-      (getPhotos(x._1), x._2)
+      (getPhotos(x._1), x._2, x._3)
     }.filter { x =>
       !x._1.isEmpty
     }
